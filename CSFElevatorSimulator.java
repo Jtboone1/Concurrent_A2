@@ -1,5 +1,3 @@
-package mun.concurrent.assignment.two;
-
 public class CSFElevatorSimulator {
 
 	static ElevatorSimulator esimulator;

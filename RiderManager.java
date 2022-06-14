@@ -1,7 +1,6 @@
 import java.util.Map;
+import java.util.HashMap;
 import java.util.ArrayList;
-
-import mun.concurrent.assignment.two.ElevatorSimulator;
 
 public class RiderManager extends Thread {
 
@@ -14,9 +13,11 @@ public class RiderManager extends Thread {
 
     public RiderManager(int size)
     {
-        floors_and_riders = new Map<Integer, Integer>(size);
+        floors_and_riders = new HashMap<Integer, Integer>(size);
         time_since_last_request = new ArrayList<Integer>(size);
 
+        // Initialize each floors last request time as 0 and each floor has
+        // 0 request pending on initialization
         for (int i = 0; i < size; i++)
         {
             floors_and_riders.put(i, 0);
@@ -26,7 +27,7 @@ public class RiderManager extends Thread {
 
     public void run()
     {
-        while (ElevatorSimulator.SimulationClock.getTick() < ElevatorSimulator.simulatorTime)
+        while (ElevatorSimulator.SimulationClock.getTick() < ElevatorSimulator.simulationTime)
         {
             for(var floor : floors_and_riders.entrySet())
             {

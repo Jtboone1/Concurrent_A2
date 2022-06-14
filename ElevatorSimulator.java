@@ -1,18 +1,16 @@
-package mun.concurrent.assignment.two;
-
 import java.util.concurrent.locks.*;
 
 public class ElevatorSimulator implements Runnable {
 
 	public static Clock SimulationClock;
-	private static ElevatorArray elevators;	
+	// private static ElevatorArray elevators;	
 	
-	public final int numElevators;
-	public final int elevatorCapacity;
-	public final int simulationTime;
+	public static int numElevators = 0;
+	public static int elevatorCapacity = 0;
+	public static int simulationTime = 0;
 	
-	private ElevatorStats elevatorStats;
-	private ElevatorRiderFactory elevatorRiderFactory;
+	// private ElevatorStats elevatorStats;
+	// private ElevatorRiderFactory elevatorRiderFactory;
 	
 	// Allocate synchronization variables
 	ReentrantLock elevatorClockLock = new ReentrantLock();
@@ -21,6 +19,11 @@ public class ElevatorSimulator implements Runnable {
 	Condition elevatorClockTicked = elevatorClockLock.newCondition();	
 
 	//<MORE VARIABLES MAY BE NEEDED HERE>
+
+	public static int get_sim_time()
+	{
+		return simulationTime;
+	}
 	
 	// Constructor
 	public ElevatorSimulator(int numElevators, int elevatorCapacity, int simulationTime)
@@ -39,7 +42,7 @@ public class ElevatorSimulator implements Runnable {
 
 		for (int i = 0; i < this.numElevators; i++)
 		{
-			Elevator new_elevator = new Elevator(i).run();
+			new Elevator(i).run();
 		}
 		// Simulate Small Elevators		
 		while (SimulationClock.getTick() < simulationTime)
