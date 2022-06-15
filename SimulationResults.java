@@ -52,11 +52,11 @@ public class SimulationResults {
         System.out.println("Total Rider Requests:       " + total_requests_created);
         System.out.println("Total Riders Served:        " + total_served);
         System.out.println("Total Riders Turned Away:   " + total_turned_away + "\n");
-        System.out.println("Average Wait Time Per Elevator:");
+        System.out.println("Average Wait Time Per Elevator (seconds):");
 
         for (int i = 0; i < time_per_elevator_request.size(); i++)
         {
-            System.out.println("Elevator " + i + " average time to complete request (seconds): " + time_per_elevator_request.get(i));
+            System.out.println("Elevator " + i + " average time to complete request: " + time_per_elevator_request.get(i));
         }
     }
 }
