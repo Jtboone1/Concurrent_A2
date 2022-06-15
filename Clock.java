@@ -4,7 +4,7 @@ public class Clock {
 	
 	public Clock()
 	{
-		curtick = 1;
+		curtick = 0;
 	}
 	
 	public void tick()
