@@ -11,6 +11,8 @@ public class ElevatorSimulator implements Runnable {
 	public static int numElevators = 0;
 	public static int elevatorCapacity = 0;
 	public static int milli_per_cycle;
+    public static ArrayList<Integer> requests_per_elevator;
+    public static ArrayList<Integer> non_idle_time_per_elevator;
 	public static boolean debug_on;
 
 	public ArrayList<Elevator> elevator_arr;
@@ -29,8 +31,17 @@ public class ElevatorSimulator implements Runnable {
 		ElevatorSimulator.debug_on = debug;
 		ElevatorSimulator.simulationTime = simulationTime;
 		ElevatorSimulator.milli_per_cycle = milli;
+		ElevatorSimulator.requests_per_elevator = new ArrayList<Integer>(numElevators);
+		ElevatorSimulator.non_idle_time_per_elevator = new ArrayList<Integer>(numElevators);
 
 		this.elevator_arr = new ArrayList<Elevator>(numElevators);
+
+        for (int i = 0; i < numElevators; i++)
+        {   
+            ElevatorSimulator.requests_per_elevator.add(0);
+            ElevatorSimulator.non_idle_time_per_elevator.add(0);
+        }
+
 		this.run();
 	}
 
@@ -81,8 +92,8 @@ public class ElevatorSimulator implements Runnable {
 
 		// We keep the results in static variables.
 		// These will get overwritten when we start another simulation
-		ElevatorSimulator.riders_served = Elevator.served;
-		ElevatorSimulator.riders_turned_away = Elevator.turned_away;
+		ElevatorSimulator.riders_served = Elevator.total_served;
+		ElevatorSimulator.riders_turned_away = Elevator.total_turned_away;
 		ElevatorSimulator.total_requests_created = RiderManager.total_riders;
 
 		Elevator.reset();
