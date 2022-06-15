@@ -1,4 +1,4 @@
-# Simulation Resuls Example:
+# Simulation Results Example:
 
 ```
 Simulation #0 Complete:
@@ -21,3 +21,4 @@ Total Riders Turned Away: 4
 ```
 
 The program has options for things like debug logs, time between clock cycles as well as simulation time.
+If you'd like to play with them, just change the function parameters in Main, and your good to go.
