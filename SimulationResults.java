@@ -46,17 +46,17 @@ public class SimulationResults {
     {
         System.out.println("\nSimulation #" + sim_id + " Complete:");
 
-        System.out.println("Simulation Time:          " + time_of_simulation);
-        System.out.println("Number of Elevators:      " + number_of_elevators);
-        System.out.println("Capacity per Elevator:    " + elevator_capacity);
-        System.out.println("Total Rider Requests:     " + total_requests_created);
-        System.out.println("Total Riders Served:      " + total_served);
-        System.out.println("Total Riders Turned Away: " + total_turned_away + "\n");
+        System.out.println("Simulation Time (seconds):  " + time_of_simulation);
+        System.out.println("Number of Elevators:        " + number_of_elevators);
+        System.out.println("Capacity per Elevator:      " + elevator_capacity);
+        System.out.println("Total Rider Requests:       " + total_requests_created);
+        System.out.println("Total Riders Served:        " + total_served);
+        System.out.println("Total Riders Turned Away:   " + total_turned_away + "\n");
         System.out.println("Average Wait Time Per Elevator:");
 
         for (int i = 0; i < time_per_elevator_request.size(); i++)
         {
-            System.out.println("Elevator " + i + " average time to complete request: " + time_per_elevator_request.get(i));
+            System.out.println("Elevator " + i + " average time to complete request (seconds): " + time_per_elevator_request.get(i));
         }
     }
 }
