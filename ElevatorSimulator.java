@@ -3,14 +3,10 @@ import java.util.concurrent.locks.*;
 public class ElevatorSimulator implements Runnable {
 
 	public static Clock SimulationClock;
-	// private static ElevatorArray elevators;	
 	
-	public static int numElevators = 0;
+	public int numElevators = 0;
 	public static int elevatorCapacity = 0;
-	public static int simulationTime = 0;
-	
-	// private ElevatorStats elevatorStats;
-	// private ElevatorRiderFactory elevatorRiderFactory;
+	public static int simulationTime;
 	
 	// Allocate synchronization variables
 	ReentrantLock elevatorClockLock = new ReentrantLock();
@@ -18,54 +14,48 @@ public class ElevatorSimulator implements Runnable {
 
 	Condition elevatorClockTicked = elevatorClockLock.newCondition();	
 
-	//<MORE VARIABLES MAY BE NEEDED HERE>
-
-	public static int get_sim_time()
+	public int get_sim_time()
 	{
 		return simulationTime;
 	}
 	
-	// Constructor
 	public ElevatorSimulator(int numElevators, int elevatorCapacity, int simulationTime)
 	{
 		this.numElevators = numElevators;
-		this.elevatorCapacity = elevatorCapacity;
-		this.simulationTime = simulationTime;
+		ElevatorSimulator.elevatorCapacity = elevatorCapacity;
+		ElevatorSimulator.simulationTime = simulationTime;
 	}
 			
 	public void run() {		
 
-		//<INITIALIZATION HERE>
-
 		SimulationClock = new Clock();
 
+		// Create Rider Manager
+		RiderManager rider_manager = new RiderManager(5);
+		rider_manager.start();
 
 		for (int i = 0; i < this.numElevators; i++)
 		{
-			new Elevator(i).run();
+			new Elevator(i).start();
 		}
+
 		// Simulate Small Elevators		
 		while (SimulationClock.getTick() < simulationTime)
 		{
 			try
 			{
-				Thread.sleep(50);
+				Thread.sleep(5);
 				elevatorClockLock.lockInterruptibly(); // Use lockInterruptibly so that thread doesn't get stuck waiting for lock
 				SimulationClock.tick();		
 				elevatorClockTicked.signalAll();										
 			}	
-			catch (InterruptedException e)
-			{				
-			}
-			finally
-			{	
-				elevatorClockLock.unlock();			
-			}	
+			catch (InterruptedException e) {}
+			finally { elevatorClockLock.unlock(); }	
 		}		
-		
-		// Output elevator stats
 
-		//<PRINT OUT STATS GATHERED DURING SIMULATION>
+		System.out.println("FINISHED!");
+		System.out.println("Riders served: " + Elevator.served);
+		System.out.println("Riders turned away: " + Elevator.turned_away);
 
 		SimulationClock.reset();			
 	}	

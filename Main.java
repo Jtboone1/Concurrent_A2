@@ -1,11 +1,11 @@
-public class CSFElevatorSimulator {
+public class Main {
 
 	static ElevatorSimulator esimulator;
 	public static void main(String[] args)
 	{
-		ElevatorSimulator smallElevatorSimulator = new ElevatorSimulator(4, 1, 7200);
+		// ElevatorSimulator smallElevatorSimulator = new ElevatorSimulator(4, 1, 7200);
 		ElevatorSimulator largeElevatorSimulator = new ElevatorSimulator(2, 2, 7200);
-		smallElevatorSimulator.run();
+		// smallElevatorSimulator.run();
 		largeElevatorSimulator.run();
 	}
 }
